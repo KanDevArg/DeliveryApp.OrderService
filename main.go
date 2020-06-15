@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	osModel "github.com/kandevarg/deliveryapp.productorderservice/proto/protoGo"
+	osModel "github.com/kandevarg/deliveryapp.orderservice/proto/protoGo"
 	micro "github.com/micro/go-micro"
 )
 
