@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "compile",
+      "path": "pkg/mod/golang.org/x/tools@v0.0.0-20191030062658-86caa796c7ab/cmd/gopls/integration/vscode/",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: compile - pkg/mod/golang.org/x/tools@v0.0.0-20191030062658-86caa796c7ab/cmd/gopls/integration/vscode",
+      "detail": "tsc -watch -p ./"
+    },
+    {
+      "label": "generate go code from protofiles",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "./protoGenerateService.sh && go build -v && go install ${env:KANDEVGO}/deliveryapp.productorderservice/ && deliveryapp.productorderservice",
+      "options": {
+        "cwd": "${workspaceRoot}/src/${env:KANDEVGO}/deliveryAppGoApi/"
+      },
+      "problemMatcher": ["$go"],
+      "isBackground": false
+    }
+  ]
+}

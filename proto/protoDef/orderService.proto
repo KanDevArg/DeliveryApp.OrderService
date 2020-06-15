@@ -1,0 +1,38 @@
+syntax = "proto3";
+package model.order;
+
+option go_package = ".;protoGo";
+
+service OrderService {
+    rpc CreateOrder(Order) returns (CreateOrderResponse) {}
+    rpc GetOrders(GetRequest) returns (GetOrdersResponse) {}
+}
+
+message Order {
+    string id = 1;
+    string  delivery_address = 2;
+    int32 due_date = 3;
+    repeated Product items = 4;
+}
+
+message Product {
+    string id = 1;
+    string desc = 2;
+    int32 qty = 3;
+}
+
+// Created a blank get request
+message GetRequest {}
+
+message CreateOrderResponse {
+    bool created = 1;
+    Order order = 2;
+    repeated Order orders = 3;
+}
+
+message GetOrdersResponse {
+    repeated Order orders = 3;
+}
+
+  
+  

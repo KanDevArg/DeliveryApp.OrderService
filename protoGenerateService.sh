@@ -1,0 +1,1 @@
+protoc -I ./proto/protoDef/ --go_out=plugins=micro:./proto/protoGo ./proto/protoDef/*.proto
