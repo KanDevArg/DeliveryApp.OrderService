@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	orderServiceProtoGo "github.com/kandevarg/deliveryapp.orderservice/proto/protoGo"
+	stockServiceProtoGo "github.com/kandevarg/deliveryapp.stockservice/proto/protoGo"
 	goMicro "github.com/micro/go-micro"
 )
 
@@ -62,6 +63,18 @@ func main() {
 	)
 	// Init will parse the command line flags.
 	microService.Init()
+
+	stockServiceClient := stockServiceProtoGo.NewStockServiceClient("deliveryapp.stockservice", microService.Client())
+
+	greetings, err := stockServiceClient.Ping(context.Background(), &stockServiceProtoGo.PingRequest{
+		CallerName: "OrderService",
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(greetings)
 
 	// Register handler
 	orderServiceProtoGo.RegisterOrderServiceHandler(microService.Server(), &service{repo})
