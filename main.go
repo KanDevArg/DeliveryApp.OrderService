@@ -64,6 +64,13 @@ func main() {
 	// Init will parse the command line flags.
 	microService.Init()
 
+	// Register handler
+	orderServiceProtoGo.RegisterOrderServiceHandler(microService.Server(), &service{repo})
+
+	if err := microService.Run(); err != nil {
+		fmt.Println(err)
+	}
+
 	stockServiceClient := stockServiceProtoGo.NewStockServiceClient("deliveryapp.stockservice", microService.Client())
 
 	greetings, err := stockServiceClient.Ping(context.Background(), &stockServiceProtoGo.PingRequest{
@@ -75,11 +82,4 @@ func main() {
 	}
 
 	fmt.Println(greetings)
-
-	// Register handler
-	orderServiceProtoGo.RegisterOrderServiceHandler(microService.Server(), &service{repo})
-
-	if err := microService.Run(); err != nil {
-		fmt.Println(err)
-	}
 }

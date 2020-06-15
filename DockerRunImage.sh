@@ -5,4 +5,4 @@ CONTAINER_NAME=$(echo "$FOLDER_NAME" |  tr '[:upper:]' '[:lower:]' )
 
 
 echo "Running image..."$CONTAINER_NAME
-docker run -p 8080:8080 $CONTAINER_NAME
+docker run $CONTAINER_NAME
