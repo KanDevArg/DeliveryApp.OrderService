@@ -5,7 +5,7 @@ option go_package = ".;protoGo";
 
 service OrderService {
     rpc CreateOrder(Order) returns (CreateOrderResponse) {}
-    rpc GetOrders(GetRequest) returns (GetOrdersResponse) {}
+    rpc GetAllOrders(BlankRequest) returns (GetOrdersResponse) {}
 }
 
 message Order {
@@ -21,8 +21,7 @@ message Product {
     int32 qty = 3;
 }
 
-// Created a blank get request
-message GetRequest {}
+message BlankRequest {}
 
 message CreateOrderResponse {
     bool created = 1;
